@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleProp, StyleSheet, Text, ViewStyle } from "react-native";
 
 import Masked from "@react-native-masked-view/masked-view";
 import { BlurView } from "expo-blur";
@@ -54,34 +54,34 @@ export default function HomeScreen() {
   );
 }
 
-function Glur({ direction, style }: { direction: "top" | "bottom" }) {
+function Glur({
+  direction,
+  style,
+}: {
+  direction: "top" | "bottom";
+  style: StyleProp<ViewStyle>;
+}) {
   const headerHeight = useReanimatedHeaderHeight();
+
+  const blurHeight = useAnimatedStyle(() => ({
+    height: headerHeight.value * 1.5,
+  }));
+
   return (
     <AnimMask
       maskElement={
         <Animated.View
           style={[
+            StyleSheet.absoluteFill,
             {
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
               backgroundColor: "transparent",
-              experimental_backgroundImage: `linear-gradient(to ${direction}, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 75%)`,
+              experimental_backgroundImage: `linear-gradient(to ${direction}, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 33%)`,
             },
             style,
           ]}
         />
       }
-      style={{
-        position: "absolute",
-        top: headerHeight,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 96,
-      }}
+      style={[StyleSheet.absoluteFill, blurHeight]}
     >
       <BlurView
         intensity={100}

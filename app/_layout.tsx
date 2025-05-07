@@ -22,7 +22,6 @@ export default function RootLayout() {
             options={{
               title: "Hello",
               headerTransparent: true,
-              headerBlurEffect: "systemChromeMaterial",
               headerLargeTitleShadowVisible: false,
               headerLargeStyle: {
                 backgroundColor: "transparent",
